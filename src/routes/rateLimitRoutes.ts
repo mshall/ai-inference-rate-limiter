@@ -4,11 +4,18 @@
 
 import { Router, Request, Response } from 'express';
 import { RateLimiter } from '../rateLimiter';
+import { ConfigLoader } from '../config';
 
 const router = Router();
 
+// Load configuration from properties file
+const config = ConfigLoader.getRateLimitConfig();
+
 // Create a single rate limiter instance (in-memory, shared across requests)
-const rateLimiter = new RateLimiter(100, 3600); // 100 requests per hour
+const rateLimiter = new RateLimiter(
+  config.requestsPerHour,
+  config.windowSeconds
+);
 
 /**
  * POST /rate-limit/allow
@@ -142,4 +149,5 @@ router.delete('/reset/:userId', (req: Request, res: Response) => {
 });
 
 export default router;
+
 
