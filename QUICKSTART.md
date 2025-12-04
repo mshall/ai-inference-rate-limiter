@@ -26,20 +26,76 @@ npm run dev
 
 Server will start on `http://localhost:3000`
 
-### 2. Run Tests
+## Testing
+
+This project uses Jest as the testing framework. The test suite includes comprehensive unit tests for the rate limiter functionality.
+
+### Running Tests
+
+#### Run All Tests
 
 ```bash
-# Run all tests
 npm test
+```
 
-# Run tests in watch mode
+This command runs all test files in the `tests/` directory and displays the results.
+
+#### Run Tests in Watch Mode
+
+```bash
 npm run test:watch
+```
 
-# Generate coverage report
+Watch mode automatically re-runs tests when you make changes to your code or test files. This is useful during development for immediate feedback.
+
+#### Run Tests with Coverage Report
+
+```bash
 npm run test:coverage
 ```
 
-### 3. Run Usage Example
+This command runs all tests and generates a detailed coverage report showing:
+- **Statement coverage**: Percentage of code statements executed
+- **Branch coverage**: Percentage of code branches (if/else, switch) executed
+- **Function coverage**: Percentage of functions called
+- **Line coverage**: Percentage of lines executed
+
+The coverage report is generated in the `coverage/` directory. You can open `coverage/lcov-report/index.html` in your browser to view an interactive coverage report.
+
+### Test Coverage Output
+
+When you run `npm run test:coverage`, you'll see output similar to:
+
+```
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   95.45 |    90.00 |   100.00 |   95.45 |
+ rateLimiter.ts    |   95.45 |    90.00 |   100.00 |   95.45 | 45,67
+-------------------|---------|----------|---------|---------|-------------------
+```
+
+### Viewing Coverage Reports
+
+After running the coverage command, you can view the detailed HTML report:
+
+```bash
+# On macOS
+open coverage/lcov-report/index.html
+
+# On Linux
+xdg-open coverage/lcov-report/index.html
+
+# On Windows
+start coverage/lcov-report/index.html
+```
+
+### Test Files
+
+The test suite is located in the `tests/` directory:
+- `tests/rateLimiter.test.ts` - Comprehensive tests for the RateLimiter class
+
+### 2. Run Usage Example
 
 ```bash
 # Demonstrates 100 requests/hour requirement
@@ -155,4 +211,5 @@ ts-node examples/api_test.ts
 2. Run the tests: `npm test`
 3. Try the usage example: `npm run example`
 4. Read the evolution guide: `docs/EVOLUTION_TO_DISTRIBUTED.md`
+
 
